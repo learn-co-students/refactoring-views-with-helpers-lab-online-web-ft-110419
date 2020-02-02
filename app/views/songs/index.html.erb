@@ -1,6 +1,20 @@
+<h2>Your Songs</h2>
 <ul>
 <% @songs.each do |song| %>
-  <li><%= link_to song.title, song_path(song) %></li>
+	<li><p>Title: <%= link_to(song.title, song_path(song)) %></p>
+	<p>Artist: <%= display_artist(song) %></p></li>
+
+	<% if song.artist==nil %>
+		<%= form_for song do |f|%>
+			<%= f.label :title, "New Name:" %>
+			<%= f.text_field :title %> 
+  			<%= fields_for song.build_artist do |art_form| %>
+  				<%= art_form.label :name, "Artist's Name:" %>
+  				<%= art_form.text_field :name %>
+  				<%= art_form.submit %>
+  			<% end %>
+  		<% end %>
+  	<% end %>
 <% end %>
 </ul>
 <br>
