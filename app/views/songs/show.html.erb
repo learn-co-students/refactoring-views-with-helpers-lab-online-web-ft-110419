@@ -1,3 +1,8 @@
 <h1><%= link_to @song.title, song_path(@song) %></h1>
 
 <%= link_to "All Songs", songs_path %>
+<% if @song.artist.name == nil %>
+    <%= link_to @song.title, method: "patch"%>
+<% else %>
+    <%= link_to @song.artist.name, artist_path(@song.artist) %>
+<% end %>
